@@ -16,7 +16,7 @@ source=(
 "$_raw_url/InconsolataNerdFontComplete-g.ttf"
 "$_raw_url/LICENSE"
 )
-md5sums=(
+sha256sums=(
 'acf8c9fa9b15a51801be003c7eb0a55c8530fe9c93c42a2deeba775f10b64fa3'
 '38dabe8206e881aa2fd82d4bc58f09447499894e063678135084614fe3e9bfcb'
 )
