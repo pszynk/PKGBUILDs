@@ -1,0 +1,35 @@
+# $Id$
+# Maintainer: Pawel Szynkiewicz (the_ham) <justhamstuff@gmail.com>
+
+pkgname=nerd-fonts-inconsolata-g
+pkgver=20190202
+pkgrel=2
+pkgdesc="Inconsolata (-g) with straight quotes and complete Nerd Fonts (+build process)."
+conflicts=(nerd-fonts-inconsolata-g-git)
+arch=('any')
+url='http://input.fontbureau.com/'
+license=(custom:OFL)
+depends=('fontconfig' 'xorg-fonts-encodings' 'xorg-font-utils')
+makedepends=('fontforge')
+_nerdfonts_ver='2.0.0'
+source=("Inconsolatag.ttf"
+        "LICENSE"
+        "nerd-fonts-2.0.0.zip"
+        )
+sha256sums=('SKIP'
+            'SKIP'
+            'SKIP')
+
+package() {
+  install -dm0755 ${pkgdir}/usr/share/fonts/TTF
+
+  mkdir -p ${srcdir}/patched
+  fontforge -script ${srcdir}/nerd-fonts-${_nerdfonts_ver}/font-patcher \
+       --progressbars --complete --adjust-line-height \
+       --outputdir ${srcdir}/patched \
+       ${srcdir}/Inconsolatag.ttf
+  install -Dm0644 ${srcdir}/patched/*.ttf ${pkgdir}/usr/share/fonts/TTF
+  install -Dm644 ${srcdir}/LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+ }
+
+# vim:set ts=2 sw=2 et:
